@@ -3,33 +3,48 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>To-Do-list</title>
         <link rel="stylesheet" href="style.css">
+        <title>To-Do-list</title>
     </head>
     <body>
-        <h1>To Do list</h1>
-           <form id="form">
-              <input type="text" id="input" placeholder="add a quick task">
-              <input type="submit" value="add" id="submit">
-           </form>
+        <h1>To Do List</h1>
+        <form method="post" action="traitement.php" id="form">
+            <input type="text" placeholder="add your task" id="input">
+            <button type="submit">add</button>
+        </form>
         <ul id="ul">
 
         </ul>
         <script>
+            let iptText = document.getElementById('input');
             let form = document.getElementById('form');
-            let inputText = document.getElementById('input');
-            let submit = document.getElementById('btn-submit');
             let ul = document.getElementById('ul');
 
-            form.addEventListener('btn-submit', function(event){
-                event.preventDefault;
-
-                if(inputText.value.trim()){
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                if(iptText.value.trim()){
                     let li = document.createElement('li');
-                    li.innerHTML = inputText.value;
-
+                    li.innerHTML = iptText.value;
                     ul.appendChild(li);
-                    inputText.value='';
+                    input.value='';
+
+                    let btnDet = document.createElement('button');
+                    btnDet.textContent = 'Detlete';
+                    btnDet.id='btndet';
+                    btnDet.style.backgroundColor ='#4caf50';
+                    btnDet.style.border = 'none';
+                    btnDet.style.color ='#fff';
+                    btnDet.style.padding = '8px'
+                    li.appendChild(btnDet);
+
+                    btnDet.addEventListener('click', function(){
+                        li.remove();
+                    });
+                    let checkbox = document.createElement('input');
+                    checkbox.type ='checkbox';
+
+                    let text_NODE = li.firstChild;
+                    li.insertBefore(checkbox, text_NODE);
                 }
             })
         </script>
